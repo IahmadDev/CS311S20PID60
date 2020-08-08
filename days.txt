@@ -1,0 +1,6 @@
+Monday,8,16,12,13,8
+Tuesday,8,16,12,13,8
+Tuesday,8,16,12,13,8
+wednesday,8,16,12,13,8
+thrusday,8,16,12,13,8
+friday,8,16,12,13,8

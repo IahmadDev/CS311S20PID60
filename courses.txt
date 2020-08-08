@@ -1,0 +1,7 @@
+AOA,c1,c1,3,samyan,0,3,false
+DBS,c2,c2,3,samyan,0,3,false
+MVC,c2,c2,3,samyan,0,3,false
+OS,c2,c2,3,samyan,0,3,false
+TAF,c2,c2,3,samyan,0,3,false
+OS lab,c2,c2,1,samyan,0,3,false
+DBS lab,c2,c2,1,samyan,0,3,false

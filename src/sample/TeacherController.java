@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,15 +30,16 @@ public class TeacherController implements Initializable {
     private TextField instructorId;
 
     @FXML
-    private ListView<Teacher> instructorListView;
+    private ListView<String> instructorListView;
 
     public static ArrayList<Teacher> officialTeachers;
+    public static ObservableList<String> teachers = FXCollections.observableArrayList();
     Teacher teacher = null;
 
     @FXML
     void onNextButtonPressed(ActionEvent event) throws IOException {
 
-        Parent dayParent = FXMLLoader.load(getClass().getResource("dayFxml.fxml"));
+        Parent dayParent = FXMLLoader.load(getClass().getResource("courseControllerFxml.fxml"));
         Scene dayScene = new Scene(dayParent);
         //This line gets the Stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -52,7 +55,8 @@ public class TeacherController implements Initializable {
 
         teacher = new Teacher(id,name,title);
         officialTeachers.add(teacher);
-
+        instructorListView.getItems().add(name);
+        teachers.add(name);
     }
 
 

@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,19 +29,31 @@ public class DayController implements Initializable {
     private TextField dayName;
 
     @FXML
-    private TextField dayEndAt;
+    private ChoiceBox<Integer> dayStartAt;
 
     @FXML
-    private TextField dayBreakStartAt;
+    private Tooltip startDayTooltip;
 
     @FXML
-    private TextField dayBreakEndAt;
+    private ChoiceBox<Integer> dayEndAt;
 
     @FXML
-    private TextField dayStartAt;
+    private Tooltip endDayTooltip;
 
     @FXML
-    private ListView<Day> daysListView;
+    private ChoiceBox<Integer> dayBreakStartAt;
+
+    @FXML
+    private Tooltip breakStartTooltip;
+
+    @FXML
+    private ChoiceBox<Integer> dayBreakEndAt;
+
+    @FXML
+    private Tooltip breakEndTooltip;
+
+    @FXML
+    private ListView<String> daysListView;
 
     public ArrayList<Day> Days =  new ArrayList<>();
 
@@ -62,14 +78,14 @@ public class DayController implements Initializable {
     @FXML
     void onSaveButtonPressed(ActionEvent event) {
          String name = dayName.getText().toString();
-         int startDay = Integer.parseInt(dayStartAt.getText().toString());
-         int endDay = Integer.parseInt(dayEndAt.getText().toString());
-         int breakStart = Integer.parseInt(dayBreakStartAt.getText().toString());
-         int breakEnd = Integer.parseInt(dayBreakEndAt.getText().toString());
+         int startDay = Integer.parseInt(dayStartAt.getValue().toString());
+         int endDay = Integer.parseInt(dayEndAt.getValue().toString());
+         int breakStart = Integer.parseInt(dayBreakStartAt.getValue().toString());
+         int breakEnd = Integer.parseInt(dayBreakEndAt.getValue().toString());
 
          Day day = new Day(name,startDay,endDay,breakStart,breakEnd,endDay-startDay,null);
          Days.add(day);
-
+         daysListView.getItems().add(day.getDayName());
 ////         Days
 //        Day Monday = new Day("Monday", 8, 16, 12, 13, 8, null);
 //        Day Tuesday = new Day("Tuesday", 8, 16, 12, 13, 8, null);
@@ -86,7 +102,31 @@ public class DayController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) { }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Integer> integers = FXCollections.observableArrayList();
+        integers.add(7);
+        integers.add(8);
+        integers.add(9);
+        integers.add(10);
+        integers.add(11);
+        integers.add(12);
+        integers.add(13);
+        integers.add(14);
+        integers.add(15);
+        integers.add(16);
+        integers.add(17);
+
+        dayStartAt.setItems(integers);
+        dayEndAt.setItems(integers);
+        dayBreakStartAt.setItems(integers);
+        dayBreakEndAt.setItems(integers);
+
+        dayStartAt.setTooltip(startDayTooltip);
+        dayEndAt.setTooltip(endDayTooltip);
+        dayBreakStartAt.setTooltip(breakStartTooltip);
+        dayBreakEndAt.setTooltip(breakEndTooltip);
+
+    }
 
     public static ArrayList<Day> getOfficialDays() {
         officialDays = new ArrayList<>();

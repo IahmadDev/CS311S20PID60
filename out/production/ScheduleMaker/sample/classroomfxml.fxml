@@ -4,28 +4,37 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
    <children>
-      <Text layoutX="201.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Class Room details" textAlignment="CENTER" wrappingWidth="197.85546875">
+      <Text layoutX="201.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter class room details" textAlignment="CENTER" wrappingWidth="197.85546875">
          <font>
-            <Font size="14.0" />
+            <Font size="17.0" />
          </font>
+         <fill>
+            <LinearGradient cycleMethod="REFLECT" endX="0.719047619047619" endY="0.49523809523809526">
+               <stops>
+                  <Stop color="#5b66b5" />
+                  <Stop color="#d75353" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </fill>
       </Text>
       <TextField fx:id="classroomId" layoutX="52.0" layoutY="96.0" promptText="Class Room id" />
       <TextField fx:id="classroomNo" layoutX="52.0" layoutY="141.0" promptText="Class Room no" />
       <TextField fx:id="classroomType" layoutX="52.0" layoutY="188.0" promptText="Class Room type" />
       <TextField fx:id="classroomAvailable" layoutX="52.0" layoutY="241.0" promptText="Class Room Available" />
-      <ListView fx:id="classRoomsListView" layoutX="360.0" layoutY="113.0" prefHeight="200.0" prefWidth="213.0" />
-      <Text layoutX="374.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER" wrappingWidth="197.85546875">
+      <ListView fx:id="classRoomsListView" layoutX="370.0" layoutY="123.0" prefHeight="200.0" prefWidth="213.0" />
+      <Text layoutX="378.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER" wrappingWidth="197.85546875">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Button layoutX="101.0" layoutY="301.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" text="save" />
-      <Button layoutX="534.0" layoutY="326.0" mnemonicParsing="false" onAction="#onNextButtonPressed" text="next" />
+      <Button layoutX="101.0" layoutY="301.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE" />
+      <Button layoutX="542.0" layoutY="334.0" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE" />
    </children>
 </AnchorPane>

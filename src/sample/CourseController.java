@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,8 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
@@ -30,13 +31,13 @@ public class CourseController implements Initializable {
     private TextField courseCode;
 
     @FXML
-    private TextField courseCreditHours;
+    private ChoiceBox<Integer> courseCreditHoursChoiceBox;
 
     @FXML
-    private TextField courseInstructorName;
+    private ChoiceBox<String> courseInstructorChoiceBox;
 
     @FXML
-    private TextField weeklyHours;
+    private ChoiceBox<Integer> courseWHChoiceBox;
 
     @FXML
     private TextField courseId;
@@ -45,7 +46,16 @@ public class CourseController implements Initializable {
     private TextField labStatus;
 
     @FXML
-    private ListView<Course> courseListView;
+    private Tooltip teachersTooltip;
+
+    @FXML
+    private Tooltip creditHoursTooltip;
+
+    @FXML
+    private Tooltip weeklyHoursTooltip;
+
+    @FXML
+    private ListView<String> courseListView;
 
     public ArrayList<Course> courses = new ArrayList<>();
 
@@ -59,7 +69,7 @@ public class CourseController implements Initializable {
         }
         writingToFile(courses);
 
-        Parent teacher = FXMLLoader.load(getClass().getResource("teacherFxml.fxml"));
+        Parent teacher = FXMLLoader.load(getClass().getResource("dayFxml.fxml"));
         Scene teacherScene = new Scene(teacher);
         //This line gets the Stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -72,13 +82,14 @@ public class CourseController implements Initializable {
         String name = courseName.getText().toString();
         String id = courseId.getText().toString();
         String code = courseCode.getText().toString();
-        int creditHours = Integer.parseInt(courseCreditHours.getText().toString());
-        String instructor = courseInstructorName.getText().toString();
-        int weeklyLectures = Integer.parseInt(weeklyHours.getText().toString());
+        int creditHours = Integer.parseInt(courseCreditHoursChoiceBox.getValue().toString());
+        String instructor = courseInstructorChoiceBox.getValue().toString();
+        int weeklyLectures = Integer.parseInt(courseWHChoiceBox.getValue().toString());
         boolean lab = Boolean.parseBoolean(labStatus.getText().toString());
 
         Course course = new Course(name,id,code,creditHours,instructor,0,weeklyLectures,lab);
         courses.add(course);
+        courseListView.getItems().add(name);
 ////         courses
 //        Course AOA = new Course("AOA", "CS131", "CS131", 3, "Samyan", 0, 3, false);
 //        Course DBS = new Course("DBS", "CS132", "CS132", 3, "Atif", 0, 3, false);
@@ -99,7 +110,21 @@ public class CourseController implements Initializable {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {    }
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        courseInstructorChoiceBox.setItems(TeacherController.teachers);
+        ObservableList<Integer> integers = FXCollections.observableArrayList();
+        integers.add(1);
+        integers.add(2);
+        integers.add(3);
+        integers.add(4);
+        integers.add(5);
+        courseCreditHoursChoiceBox.setItems(integers);
+        courseWHChoiceBox.setItems(integers);
+
+        courseInstructorChoiceBox.setTooltip(teachersTooltip);
+        courseWHChoiceBox.setTooltip(weeklyHoursTooltip);
+        courseCreditHoursChoiceBox.setTooltip(creditHoursTooltip);
+    }
 
     public static ArrayList<Course> getOfficialCourses() {
         officialCourses = new ArrayList<>();

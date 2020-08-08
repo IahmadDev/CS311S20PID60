@@ -30,7 +30,7 @@ public class ClassroomController implements Initializable {
     private TextField classroomAvailable;
 
     @FXML
-    private ListView<ClassRoom> classRoomsListView;
+    private ListView<String> classRoomsListView;
 
     public static ArrayList<ClassRoom> officalClassRooms = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class ClassroomController implements Initializable {
         }
         System.out.println();
 
-        Parent course  = FXMLLoader.load(getClass().getResource("courseControllerFxml.fxml"));
+        Parent course  = FXMLLoader.load(getClass().getResource("teacherFxml.fxml"));
         Scene courseScene = new Scene(course);
         //This line gets the Stage information
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -64,7 +64,7 @@ public class ClassroomController implements Initializable {
 
         classRoom = new ClassRoom(classId,classNumber,classAvailable,classType);
         officalClassRooms.add(classRoom);
-
+        classRoomsListView.getItems().add(classRoom.getClassRoomId());
         //        // ClassRooms
 //        ClassRoom N1 = new ClassRoom("N1", 1, true, "Lecture");
 //        ClassRoom N2 = new ClassRoom("N2", 2, true, "Lecture");

@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
-   <children>
-      <Text layoutX="201.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter course details" textAlignment="CENTER" wrappingWidth="197.85546875">
+<BorderPane prefHeight="414.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter course details" textAlignment="CENTER" wrappingWidth="197.85546875" BorderPane.alignment="CENTER">
          <font>
-            <Font size="17.0" />
+            <Font size="18.0" />
          </font>
          <fill>
             <LinearGradient cycleMethod="REFLECT" endX="0.719047619047619" endY="0.49523809523809526">
@@ -25,33 +27,99 @@
                </stops>
             </LinearGradient>
          </fill>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
       </Text>
-      <TextField fx:id="courseName" layoutX="62.0" layoutY="74.0" promptText="Course name" />
-      <TextField fx:id="courseCode" layoutX="62.0" layoutY="155.0" promptText="Course code" />
-      <TextField fx:id="courseId" layoutX="62.0" layoutY="112.0" promptText="Course id" />
-      <TextField fx:id="labStatus" layoutX="62.0" layoutY="336.0" promptText="Lab status (true or false)" />
-      <Text layoutX="379.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" textAlignment="CENTER" wrappingWidth="197.85546875">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <ListView fx:id="courseListView" layoutX="370.0" layoutY="123.0" prefHeight="200.0" prefWidth="213.0" />
-      <Button layoutX="109.0" layoutY="377.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE" />
-      <Button layoutX="543.0" layoutY="333.0" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE" />
-      <ChoiceBox fx:id="courseInstructorChoiceBox" layoutX="62.0" layoutY="243.0" prefWidth="150.0">
-         <tooltip>
-            <Tooltip fx:id="teachersTooltip" text="Select teacher " />
-         </tooltip>
-      </ChoiceBox>
-      <ChoiceBox fx:id="courseCreditHoursChoiceBox" layoutX="62.0" layoutY="196.0" prefWidth="150.0">
-         <tooltip>
-            <Tooltip fx:id="creditHoursTooltip" text="Seect Credit hours" />
-         </tooltip>
-      </ChoiceBox>
-      <ChoiceBox fx:id="courseWHChoiceBox" layoutX="62.0" layoutY="290.0" prefWidth="150.0">
-         <tooltip>
-            <Tooltip fx:id="weeklyHoursTooltip" text="Select lectures per week" />
-         </tooltip>
-      </ChoiceBox>
-   </children>
-</AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="285.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="courseName" promptText="Course name">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="courseNameTooltip" text="Enter course name" />
+               </tooltip></TextField>
+            <TextField fx:id="courseCode" promptText="Course code">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="courseCodeTooltip" text="Enter course code" />
+               </tooltip></TextField>
+            <TextField fx:id="courseId" promptText="Course id">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="courseIdTooltip" text="Enter course id" />
+               </tooltip></TextField>
+            <TextField fx:id="labStatus" promptText="Lab status (true or false)">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="courseLabStatusTooltip" text="Give lab status (True or false )" />
+               </tooltip></TextField>
+            <ChoiceBox fx:id="courseInstructorChoiceBox" prefWidth="150.0">
+               <tooltip>
+                  <Tooltip fx:id="teachersTooltip" text="Select teacher " />
+               </tooltip>
+               <VBox.margin>
+                  <Insets left="22.0" top="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="courseCreditHoursChoiceBox" prefWidth="150.0">
+               <tooltip>
+                  <Tooltip fx:id="creditHoursTooltip" text="Seect Credit hours" />
+               </tooltip>
+               <VBox.margin>
+                  <Insets left="22.0" top="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <ChoiceBox fx:id="courseWHChoiceBox" prefWidth="150.0">
+               <tooltip>
+                  <Tooltip fx:id="weeklyHoursTooltip" text="Select lectures per week" />
+               </tooltip>
+               <VBox.margin>
+                  <Insets left="22.0" top="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <Button mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="70.0" top="10.0" />
+               </VBox.margin></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="375.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Courses" textAlignment="CENTER" wrappingWidth="197.85546875">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="courseListView" prefHeight="200.0" prefWidth="213.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin></ListView>
+            <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="80.0" top="10.0" />
+               </VBox.margin></Button>
+         </children>
+         <BorderPane.margin>
+            <Insets right="10.0" top="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+</BorderPane>

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TeacherController">
-   <children>
-      <TextField fx:id="instructorName" layoutX="52.0" layoutY="113.0" promptText="Instructor name" />
-      <TextField fx:id="instructorTitle" layoutX="52.0" layoutY="194.0" promptText="Instructor title" />
-      <TextField fx:id="instructorId" layoutX="52.0" layoutY="151.0" promptText="Instructor id" />
-      <Text layoutX="201.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter teacher details" textAlignment="CENTER" wrappingWidth="197.85546875">
+<BorderPane prefHeight="416.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TeacherController">
+   <top>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter teacher details" textAlignment="CENTER" wrappingWidth="197.85546875" BorderPane.alignment="CENTER">
          <font>
-            <Font size="17.0" />
+            <Font size="18.0" />
          </font>
          <fill>
             <LinearGradient cycleMethod="REFLECT" endX="0.719047619047619" endY="0.49523809523809526">
@@ -26,14 +26,74 @@
                </stops>
             </LinearGradient>
          </fill>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
       </Text>
-      <Text layoutX="379.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teachers" textAlignment="CENTER" wrappingWidth="197.85546875">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Text>
-      <ListView fx:id="instructorListView" layoutX="370.0" layoutY="123.0" prefHeight="200.0" prefWidth="213.0" />
-      <Button layoutX="107.0" layoutY="245.0" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE" />
-      <Button layoutX="543.0" layoutY="334.0" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE" />
-   </children>
-</AnchorPane>
+   </top>
+   <left>
+      <VBox prefHeight="285.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="instructorName" promptText="Instructor name">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="instructorNameTooltip" text="Enter instructor name" />
+               </tooltip>
+            </TextField>
+            <TextField fx:id="instructorId" promptText="Instructor id">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="instructorIdTooltip" text="enter instructor id " />
+               </tooltip>
+            </TextField>
+            <TextField fx:id="instructorTitle" promptText="Instructor title">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip fx:id="instructorTitleTooltip" text="enter instructor title ( senior or junor etc. ))" />
+               </tooltip>
+            </TextField>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="70.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets left="10.0" top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <right>
+      <VBox prefHeight="375.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Teachers" textAlignment="CENTER" wrappingWidth="197.85546875">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Text>
+            <ListView fx:id="instructorListView" prefHeight="200.0" prefWidth="213.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </ListView>
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="80.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets right="10.0" top="15.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+</BorderPane>

@@ -9,11 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,6 +25,9 @@ public class DayController implements Initializable {
 
     @FXML
     private TextField dayName;
+
+    @FXML
+    private Tooltip dayNameTooltip;
 
     @FXML
     private ChoiceBox<Integer> dayStartAt;
@@ -55,72 +56,66 @@ public class DayController implements Initializable {
     @FXML
     private ListView<String> daysListView;
 
-    public ArrayList<Day> Days =  new ArrayList<>();
+    public ArrayList<Day> Days = new ArrayList<>();
 
-    public static ArrayList<Day> officialDays =  new ArrayList<>();
+    public static ArrayList<Day> officialDays = new ArrayList<>();
 
     @FXML
     void onGenerateButtonPressed(ActionEvent event) throws IOException {
-        for(Day day : Days){
+        int yesOrNo = 0;
+        if(Days.isEmpty()){
+            yesOrNo = ConfirmDialgoe.showConfirmDialoge("You can't make schedule without any Day");
+        }
+
+        for (Day day : Days) {
             System.out.println(day);
         }
 
-        writeToFile(Days);
+        if(yesOrNo == 0) {
 
-        Parent classRoom = FXMLLoader.load(getClass().getResource("scheduleControllerFxml.fxml"));
-        Scene classRoomScene = new Scene(classRoom);
-        //This line gets the Stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(classRoomScene);
-        window.show();
+            writeToFile(Days);
+
+            Parent classRoom = FXMLLoader.load(getClass().getResource("scheduleControllerFxml.fxml"));
+            Scene classRoomScene = new Scene(classRoom);
+            //This line gets the Stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(classRoomScene);
+            window.show();
+        }
     }
 
     @FXML
     void onSaveButtonPressed(ActionEvent event) {
-         String name = dayName.getText().toString();
-         int startDay = Integer.parseInt(dayStartAt.getValue().toString());
-         int endDay = Integer.parseInt(dayEndAt.getValue().toString());
-         int breakStart = Integer.parseInt(dayBreakStartAt.getValue().toString());
-         int breakEnd = Integer.parseInt(dayBreakEndAt.getValue().toString());
 
-         Day day = new Day(name,startDay,endDay,breakStart,breakEnd,endDay-startDay,null);
-         Days.add(day);
-         daysListView.getItems().add(day.getDayName());
-////         Days
-//        Day Monday = new Day("Monday", 8, 16, 12, 13, 8, null);
-//        Day Tuesday = new Day("Tuesday", 8, 16, 12, 13, 8, null);
-//        Day Wednesday = new Day("Wednesday", 8, 16, 12, 13, 8, null);
-//        Day Thursday = new Day("Thursday", 8, 16, 12, 13, 8, null);
-//        Day Friday = new Day("Friday", 8, 16, 12, 13, 8, null);
-//
-//        Days.add(Monday);
-//        Days.add(Tuesday);
-//        Days.add(Wednesday);
-//        Days.add(Thursday);
-//        Days.add(Friday);
+        if (isEmptyFields()) {
+            showAlertDialoge("Please enter into fields");
+        } else if (isEmptyChoiceBoxes()) {
+            showAlertDialoge("Please select from choice boxes");
+        } else {
 
+            String name = dayName.getText().toString();
+            int startDay = Integer.parseInt(dayStartAt.getValue().toString());
+            int endDay = Integer.parseInt(dayEndAt.getValue().toString());
+            int breakStart = Integer.parseInt(dayBreakStartAt.getValue().toString());
+            int breakEnd = Integer.parseInt(dayBreakEndAt.getValue().toString());
+
+            Day day = new Day(name, startDay, endDay, breakStart, breakEnd, endDay - startDay, null);
+            Days.add(day);
+            daysListView.getItems().add(day.getDayName());
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Integer> integers = FXCollections.observableArrayList();
-        integers.add(7);
-        integers.add(8);
-        integers.add(9);
-        integers.add(10);
-        integers.add(11);
-        integers.add(12);
-        integers.add(13);
-        integers.add(14);
-        integers.add(15);
-        integers.add(16);
-        integers.add(17);
+        integers.addAll(6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
 
         dayStartAt.setItems(integers);
         dayEndAt.setItems(integers);
         dayBreakStartAt.setItems(integers);
         dayBreakEndAt.setItems(integers);
 
+        dayName.setTooltip(dayNameTooltip);
         dayStartAt.setTooltip(startDayTooltip);
         dayEndAt.setTooltip(endDayTooltip);
         dayBreakStartAt.setTooltip(breakStartTooltip);
@@ -137,7 +132,7 @@ public class DayController implements Initializable {
             scanner = new Scanner(new FileReader("days.txt"));
             scanner.useDelimiter(",");
 
-            while (scanner.hasNextLine()){
+            while (scanner.hasNextLine()) {
                 String dayName = scanner.next();
                 scanner.skip(scanner.delimiter());
 
@@ -155,7 +150,7 @@ public class DayController implements Initializable {
 
                 int studiesHours = Integer.parseInt(scanner.nextLine());
 
-                Day day = new Day(dayName,startDay,endDay,breakStart,breakEnd,studiesHours,null);
+                Day day = new Day(dayName, startDay, endDay, breakStart, breakEnd, studiesHours, null);
                 officialDays.add(day);
             }
 
@@ -166,11 +161,11 @@ public class DayController implements Initializable {
         return officialDays;
     }
 
-    public void writeToFile(ArrayList<Day> days){
+    public void writeToFile(ArrayList<Day> days) {
         FileWriter locFile = null;
         try {
             locFile = new FileWriter("days.txt");
-            for(Day day : days){
+            for (Day day : days) {
                 locFile.write(day.getDayName() + "," + day.getStartDay() + "," + day.getEndDay() + "," + day.getBreakStart()
                         + "," + day.getBreakEnd() + "," + day.getStudiesHours() + "\n");
             }
@@ -187,6 +182,31 @@ public class DayController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isEmptyFields() {
+        if (dayName.getText().toString().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isEmptyChoiceBoxes() {
+        if (dayStartAt.getValue() == null || dayEndAt.getValue() == null
+                || dayBreakStartAt.getValue() == null || dayBreakEndAt.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void showAlertDialoge(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validate Fields");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }

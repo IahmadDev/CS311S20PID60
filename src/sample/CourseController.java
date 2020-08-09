@@ -31,6 +31,18 @@ public class CourseController implements Initializable {
     private TextField courseCode;
 
     @FXML
+    private Tooltip courseNameTooltip;
+
+    @FXML
+    private Tooltip courseCodeTooltip;
+
+    @FXML
+    private Tooltip courseIdTooltip;
+
+    @FXML
+    private Tooltip courseLabStatusTooltip;
+
+    @FXML
     private ChoiceBox<Integer> courseCreditHoursChoiceBox;
 
     @FXML
@@ -63,63 +75,61 @@ public class CourseController implements Initializable {
 
     @FXML
     void onNextButtonPressed(ActionEvent event) throws IOException {
+        int yesOrNo = 0;
+        if (courses.isEmpty()) {
+            yesOrNo = ConfirmDialgoe.showConfirmDialoge("You can't make schedule without courses");
+        }
 
-        for(Course c: courses){
+        for (Course c : courses) {
             System.out.println(c);
         }
-        writingToFile(courses);
 
-        Parent teacher = FXMLLoader.load(getClass().getResource("dayFxml.fxml"));
-        Scene teacherScene = new Scene(teacher);
-        //This line gets the Stage information
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(teacherScene);
-        window.show();
+        if (yesOrNo == 0) {
+            writingToFile(courses);
+            Parent teacher = FXMLLoader.load(getClass().getResource("dayFxml.fxml"));
+            Scene teacherScene = new Scene(teacher);
+            //This line gets the Stage information
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(teacherScene);
+            window.show();
+        }
     }
 
     @FXML
     void onSaveButtonPressed(ActionEvent event) {
-        String name = courseName.getText().toString();
-        String id = courseId.getText().toString();
-        String code = courseCode.getText().toString();
-        int creditHours = Integer.parseInt(courseCreditHoursChoiceBox.getValue().toString());
-        String instructor = courseInstructorChoiceBox.getValue().toString();
-        int weeklyLectures = Integer.parseInt(courseWHChoiceBox.getValue().toString());
-        boolean lab = Boolean.parseBoolean(labStatus.getText().toString());
 
-        Course course = new Course(name,id,code,creditHours,instructor,0,weeklyLectures,lab);
-        courses.add(course);
-        courseListView.getItems().add(name);
-////         courses
-//        Course AOA = new Course("AOA", "CS131", "CS131", 3, "Samyan", 0, 3, false);
-//        Course DBS = new Course("DBS", "CS132", "CS132", 3, "Atif", 0, 3, false);
-//        Course MVC = new Course("MVC", "CS133", "CS133", 3, "Rubina", 0, 3, false);
-//        Course OS = new Course("OS", "CS134", "CS134", 3, "Sadaf", 0, 3, false);
-//        Course TAF = new Course("TAF", "CS135", "CS135", 3, "Tauqeer", 0, 3, false);
-//        Course OS_Lab = new Course("OS_Lab", "CS136", "CS136", 1, "Mahira", 0, 3, false);
-//        Course DBS_Lab = new Course("DBS_Lab", "CS137", "CS137", 1, "Laeeq", 0, 3, false);
-//        //   Course course = new Course("AOA","CS131","CS131",3,"Sir");
-//
-//        courses.add(AOA);
-//        courses.add(DBS);
-//        courses.add(MVC);
-//        courses.add(OS);
-//        courses.add(TAF);
-//        courses.add(OS_Lab);
-//        courses.add(DBS_Lab);
+        if (isEmptyFields()) {
+            showAlertDialoge("Please enter into fields");
+        } else if (isEmptyChoiceBoxes()) {
+            showAlertDialoge("Please select from choice boxes");
+        } else {
+
+            String name = courseName.getText().toString();
+            String id = courseId.getText().toString();
+            String code = courseCode.getText().toString();
+            int creditHours = Integer.parseInt(courseCreditHoursChoiceBox.getValue().toString());
+            String instructor = courseInstructorChoiceBox.getValue().toString();
+            int weeklyLectures = Integer.parseInt(courseWHChoiceBox.getValue().toString());
+            boolean lab = Boolean.parseBoolean(labStatus.getText().toString());
+
+            Course course = new Course(name, id, code, creditHours, instructor, 0, weeklyLectures, lab);
+            courses.add(course);
+            courseListView.getItems().add(name);
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         courseInstructorChoiceBox.setItems(TeacherController.teachers);
         ObservableList<Integer> integers = FXCollections.observableArrayList();
-        integers.add(1);
-        integers.add(2);
-        integers.add(3);
-        integers.add(4);
-        integers.add(5);
+        integers.addAll(1, 2, 3, 4, 5);
         courseCreditHoursChoiceBox.setItems(integers);
         courseWHChoiceBox.setItems(integers);
+
+        courseName.setTooltip(courseNameTooltip);
+        courseCode.setTooltip(courseCodeTooltip);
+        courseId.setTooltip(courseIdTooltip);
+        labStatus.setTooltip(courseLabStatusTooltip);
 
         courseInstructorChoiceBox.setTooltip(teachersTooltip);
         courseWHChoiceBox.setTooltip(weeklyHoursTooltip);
@@ -195,4 +205,31 @@ public class CourseController implements Initializable {
             }
         }
     }
+
+    public boolean isEmptyFields() {
+        if (courseName.getText().toString().isEmpty() || courseCode.getText().toString().isEmpty()
+                || courseId.getText().toString().isEmpty() || labStatus.getText().toString().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isEmptyChoiceBoxes() {
+        if (courseCreditHoursChoiceBox.getValue() == null || courseWHChoiceBox.getValue() == null
+                || courseInstructorChoiceBox.getValue() == null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void showAlertDialoge(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Validate Fields");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

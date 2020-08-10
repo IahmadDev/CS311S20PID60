@@ -30,25 +30,25 @@ public class DayController implements Initializable {
     private Tooltip dayNameTooltip;
 
     @FXML
-    private ChoiceBox<Integer> dayStartAt;
+    private ComboBox<Integer> dayStartAt;
 
     @FXML
     private Tooltip startDayTooltip;
 
     @FXML
-    private ChoiceBox<Integer> dayEndAt;
+    private ComboBox<Integer> dayEndAt;
 
     @FXML
     private Tooltip endDayTooltip;
 
     @FXML
-    private ChoiceBox<Integer> dayBreakStartAt;
+    private ComboBox<Integer> dayBreakStartAt;
 
     @FXML
     private Tooltip breakStartTooltip;
 
     @FXML
-    private ChoiceBox<Integer> dayBreakEndAt;
+    private ComboBox<Integer> dayBreakEndAt;
 
     @FXML
     private Tooltip breakEndTooltip;

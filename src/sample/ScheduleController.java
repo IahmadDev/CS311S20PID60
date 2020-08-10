@@ -1,19 +1,59 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+
 import java.net.URL;
 import java.util.*;
 
 public class ScheduleController implements Initializable {
 
+    @FXML
+    private TableView<Data> tableView;
+
+    @FXML
+    private TableColumn<Data, String> daysColumn;
+
+    @FXML
+    private TableColumn<Data, String> lecture1Col;
+
+    @FXML
+    private TableColumn<Data, String> lecture2Col;
+
+    @FXML
+    private TableColumn<Data, String> lecture3Col;
+
+    @FXML
+    private TableColumn<Data, String> lecture4Col;
+
+    @FXML
+    private TableColumn<Data, String> breakCol;
+
+    @FXML
+    private TableColumn<Data, String> lecture5Col;
+
+    @FXML
+    private TableColumn<Data, String> lecture6Col;
+
+    @FXML
+    private TableColumn<Data, String> lecture7Col;
+
+    @FXML
+    private ComboBox<String> comboBoxForClassrooms;
+
+    @FXML
+    private Tooltip scComboBoxTooltip;
+
     private ArrayList<Course> dailyCourses;
 
-    public  ArrayList<Course> courses = new ArrayList<>();
+    public ArrayList<Course> courses = new ArrayList<>();
 
-    private  ArrayList<Day> days = new ArrayList<>();
+    private ArrayList<Day> days = new ArrayList<>();
 
     private ArrayList<Lecture> lectures;
 
@@ -23,20 +63,33 @@ public class ScheduleController implements Initializable {
 
     public Map<ClassRoom, Map<Day, ArrayList<Course>>> schedule = new HashMap<>();
 
-    @FXML
-    private TextArea textArea;
+    private Map<String, ArrayList<Lecture>> settingLectures = new HashMap<>();
+
+    private ObservableList<Data> datas = FXCollections.observableArrayList();
 
     @FXML
     void onButton(ActionEvent event) {
-        textArea.setText("");
+        tableView.getItems().clear();
+
+        printDataForClassRoom(getClassRoom(comboBoxForClassrooms.getValue().toString()));
+        settingOfData();
+        displayData();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        initial();
+        setComboBox();
+
         // scheduling
         makeSchedule();
         System.out.println("\n\n");
         removeCollision();
 
         int k = 0;
-        while (collisionLectures().size() != 0 ) {
-            System.out.println("\n\n\n" + " Please wait, we're making a new schedule for the " + k++  + "th time\n\n\n");
+        while (collisionLectures().size() != 0) {
+            System.out.println("\n\n\n" + " Please wait, we're making a new schedule for the " + k++ + "th time\n\n\n");
             makeSchedule();
             removeCollision();
         }
@@ -52,13 +105,21 @@ public class ScheduleController implements Initializable {
         printData();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        // ClassRooms
-        initial();
+    public void displayData() {
+        daysColumn.setCellValueFactory(new PropertyValueFactory<Data, String>("dayName"));
+        lecture1Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture1"));
+        lecture2Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture2"));
+        lecture3Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture3"));
+        lecture4Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture4"));
+        lecture5Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture5"));
+        lecture6Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture6"));
+        lecture7Col.setCellValueFactory(new PropertyValueFactory<Data, String>("lecture7"));
+        breakCol.setCellValueFactory(new PropertyValueFactory<Data, String>("dayBreak"));
+
+        tableView.setItems(datas);
     }
 
-    public  void makeSchedule() {
+    public void makeSchedule() {
 
         for (ClassRoom currentClassRoom : classRooms) {
             routine = new HashMap<>();
@@ -67,8 +128,8 @@ public class ScheduleController implements Initializable {
                 lectures = new ArrayList<>();
                 Collections.shuffle(courses);
                 for (Course currentCourse : courses) {
-                    if ((currentCourse.getCourseCreditHours() > 2)
-                            && currentCourse.getStudied() < currentCourse.getWeeklyLectures()) {
+                    if ((currentCourse.getCourseCreditHours() >= 1)
+                            && currentCourse.getStudied() < currentCourse.getWeeklyLectures() && !currentCourse.getLabStatus()) {
                         // for subjects having greater than 2 credit hours
                         if (currentDay.getStudiesHours() != 12) {
                             int startLectureAt = currentDay.getStudiesHours();
@@ -89,7 +150,7 @@ public class ScheduleController implements Initializable {
                     } else if ((currentCourse.getCourseCreditHours() == 1 && currentCourse.getWeeklyLectures() == 3) && (
                             (currentDay.getBreakStart() - currentDay.getStudiesHours() >= 3) ||
                                     (currentDay.getStudiesHours() > currentDay.getBreakEnd() && currentDay.getEndDay() - currentDay.getStudiesHours() >= 3))
-                            && (!currentCourse.getLabStatus())
+                            && (currentCourse.getLabStatus())
                     ) {
                         // for labs having 3 consecutive lectures
 
@@ -113,23 +174,83 @@ public class ScheduleController implements Initializable {
         }
     }
 
-    public  void printData() {
-
+    public void printData() {
         for (ClassRoom classRoom : schedule.keySet()) {
-            textArea.appendText(classRoom.getClassRoomId());
+            System.out.print(classRoom.getClassRoomId());
             Map<Day, ArrayList<Course>> map = schedule.get(classRoom);
             for (Day day : map.keySet()) {
-                textArea.appendText("\n" + day.getDayName() + " ->>>>> ");
+                System.out.print("\n" + day.getDayName() + " ->>>>> ");
                 ArrayList<Lecture> lectures = day.getLectures();
                 for (Lecture lecture : lectures) {
-                    textArea.appendText(lecture.getSubjectName() + "\t");
+                    System.out.print(lecture.getSubjectName() + "\t");
                 }
             }
-            textArea.appendText("\n\n");
+            System.out.println("\n\n");
         }
     }
 
-    public  ArrayList<CollisionLecture> collisionLectures() {
+    public void printDataForClassRoom(ClassRoom classRoom) {
+        Map<Day, ArrayList<Course>> map = schedule.get(classRoom);
+        for (Day day : map.keySet()) {
+            System.out.println("\n" + day.getDayName() + " ->>>>> ");
+            ArrayList<Lecture> lectures = day.getLectures();
+            for (Lecture lecture : lectures) {
+                System.out.println(lecture.getSubjectName() + "\t");
+            }
+
+            ArrayList<Lecture> ls = new ArrayList<>();
+            for (int i = 0; i < lectures.size(); i++) {
+                Lecture lecture = lectures.get(i);
+                int s = lecture.getEnd() - lecture.getStart();
+                while (s != 0) {
+                    ls.add(lecture);
+                    s--;
+                }
+            }
+            settingLectures.put(day.getDayName(), ls);
+        }
+        System.out.println("\n\n");
+    }
+
+    public void settingOfData() {
+
+        for (String dayName : settingLectures.keySet()) {
+            System.out.print("\n" + dayName + "-----");
+            for (Lecture lecture : settingLectures.get(dayName)) {
+                System.out.print(lecture.getSubjectName() + "\t");
+            }
+            ArrayList<Lecture> ls = settingLectures.get(dayName);
+            Data data = new Data();
+            for (int i = 0; i < ls.size(); i++) {
+                data.setDayName(dayName);
+                if (i == 0) {
+                    data.setLecture1(ls.get(i).getSubjectName());
+                } else if (i == 1) {
+                    data.setLecture2(ls.get(i).getSubjectName());
+                } else if (i == 2) {
+                    data.setLecture3(ls.get(i).getSubjectName());
+                } else if (i == 3) {
+                    data.setLecture4(ls.get(i).getSubjectName());
+                } else if (i == 4) {
+                    data.setDayBreak(ls.get(i).getSubjectName());
+                } else if (i == 5) {
+                    data.setLecture5(ls.get(i).getSubjectName());
+                } else if (i == 6) {
+                    data.setLecture6(ls.get(i).getSubjectName());
+                } else if (i == 7) {
+                    data.setLecture7(ls.get(i).getSubjectName());
+                } else if (i == 8) {
+                    data.setLecture2(ls.get(i).getSubjectName());
+                }
+            }
+            datas.add(data);
+        }
+        for (Data d : datas) {
+            System.out.println(d);
+        }
+    }
+
+    public ArrayList<CollisionLecture> collisionLectures() {
         ArrayList<CollisionLecture> collisionLectures = new ArrayList<>();
         for (int i = 0; i < classRooms.size(); i++) {
             ClassRoom prevClassRoom = classRooms.get(i);
@@ -158,18 +279,18 @@ public class ScheduleController implements Initializable {
         return collisionLectures;
     }
 
-    public  void removeCollision(){
+    public void removeCollision() {
 
-        int j=0;
+        int j = 0;
         boolean done = false;
 
         ArrayList<CollisionLecture> collisions = collisionLectures();
-        ClassRoom classRoom ;
+        ClassRoom classRoom;
 
         for (CollisionLecture lecture : collisions) {
             System.out.println("Returning back " + ++j);
 
-            if(lecture.getDay().getStudiesHours() == lecture.getDay().getEndDay()){
+            if (lecture.getDay().getStudiesHours() == lecture.getDay().getEndDay()) {
                 classRoom = lecture.getOfClassRoom();
                 System.out.println("of classRoom");
             } else {
@@ -234,13 +355,29 @@ public class ScheduleController implements Initializable {
 
     }
 
-    public void initial(){
+    public void initial() {
         courses = new ArrayList<>();
         days = new ArrayList<>();
 
         courses = CourseController.getOfficialCourses();
         days = DayController.getOfficialDays();
         classRooms = ClassroomController.getOfficialClassRooms();
+    }
+
+    public void setComboBox() {
+        comboBoxForClassrooms.setTooltip(scComboBoxTooltip);
+        for (ClassRoom classRoom : ClassroomController.officalClassRooms) {
+            comboBoxForClassrooms.getItems().add(classRoom.getClassRoomId());
+        }
+    }
+
+    public ClassRoom getClassRoom(String id) {
+        for (ClassRoom classRoom : ClassroomController.officalClassRooms) {
+            if (classRoom.getClassRoomId().equals(id)) {
+                return classRoom;
+            }
+        }
+        return null;
     }
 
 }

@@ -43,13 +43,13 @@ public class CourseController implements Initializable {
     private Tooltip courseLabStatusTooltip;
 
     @FXML
-    private ChoiceBox<Integer> courseCreditHoursChoiceBox;
+    private ComboBox<Integer> courseCreditHoursChoiceBox;
 
     @FXML
-    private ChoiceBox<String> courseInstructorChoiceBox;
+    private ComboBox<String> courseInstructorChoiceBox;
 
     @FXML
-    private ChoiceBox<Integer> courseWHChoiceBox;
+    private ComboBox<Integer> courseWHChoiceBox;
 
     @FXML
     private TextField courseId;

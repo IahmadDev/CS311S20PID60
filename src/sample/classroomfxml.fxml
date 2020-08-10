@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
+<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
    <top>
       <Text fill="#e56767" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER CLASS ROOM DETAILS" textAlignment="CENTER" wrappingWidth="218.85546946525574" BorderPane.alignment="CENTER">
          <font>

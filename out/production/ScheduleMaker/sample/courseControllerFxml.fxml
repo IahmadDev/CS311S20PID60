@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="414.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
+<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER COURSE DETAILS" textAlignment="CENTER" wrappingWidth="197.85546875" BorderPane.alignment="CENTER">
          <font>
@@ -28,28 +28,28 @@
    <left>
       <VBox prefHeight="285.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="courseName" promptText="Course name">
+            <TextField fx:id="courseName" promptText="Course name" style="-fx-background-color: #05071F; -fx-background-radius: 2em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <tooltip>
                   <Tooltip fx:id="courseNameTooltip" text="Enter course name" />
                </tooltip></TextField>
-            <TextField fx:id="courseCode" promptText="Course code">
+            <TextField fx:id="courseCode" promptText="Course code" style="-fx-background-color: #05071F; -fx-background-radius: 2em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <tooltip>
                   <Tooltip fx:id="courseCodeTooltip" text="Enter course code" />
                </tooltip></TextField>
-            <TextField fx:id="courseId" promptText="Course id">
+            <TextField fx:id="courseId" promptText="Course id" style="-fx-background-color: #05071F; -fx-background-radius: 2em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <tooltip>
                   <Tooltip fx:id="courseIdTooltip" text="Enter course id" />
                </tooltip></TextField>
-            <TextField fx:id="labStatus" promptText="Lab status (true or false)">
+            <TextField fx:id="labStatus" promptText="Lab status (true or false)" style="-fx-background-color: #05071F; -fx-background-radius: 2em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -105,7 +105,7 @@
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin></ListView>
-            <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="Next" textFill="WHITE">
+            <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: orange;" text="Next" textFill="WHITE">
                <VBox.margin>
                   <Insets left="80.0" top="10.0" />
                </VBox.margin></Button>

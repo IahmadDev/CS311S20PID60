@@ -3,23 +3,14 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="414.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
+<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ClassroomController">
    <top>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER CLASS ROOM DETAILS" textAlignment="CENTER" wrappingWidth="197.85546875" BorderPane.alignment="CENTER">
+      <Text fill="#e56767" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER CLASS ROOM DETAILS" textAlignment="CENTER" wrappingWidth="218.85546946525574" BorderPane.alignment="CENTER">
          <font>
-            <Font size="15.0" />
+            <Font name="System Bold" size="15.0" />
          </font>
-         <fill>
-            <LinearGradient cycleMethod="REFLECT" endX="0.719047619047619" endY="0.49523809523809526">
-               <stops>
-                  <Stop color="#5b66b5" />
-                  <Stop color="#d75353" offset="1.0" />
-               </stops>
-            </LinearGradient>
-         </fill>
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin>
@@ -30,7 +21,7 @@
          <BorderPane.margin>
             <Insets left="10.0" top="20.0" />
          </BorderPane.margin>
-         <TextField fx:id="classroomId" promptText="Class Room id">
+         <TextField fx:id="classroomId" promptText="Class Room id" style="-fx-background-color: #05071F; -fx-background-radius: 5em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
             <VBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -38,7 +29,7 @@
                <Tooltip fx:id="crIdTooltip" text="Enter classroom id" />
             </tooltip>
          </TextField>
-         <TextField fx:id="classroomNo" promptText="Class Room no">
+         <TextField fx:id="classroomNo" promptText="Class Room no" style="-fx-background-color: #05071F; -fx-background-radius: 5em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
             <VBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -46,7 +37,7 @@
                <Tooltip fx:id="crNoTooltip" text="enter class room number" />
             </tooltip>
          </TextField>
-         <TextField fx:id="classroomType" promptText="Class Room type">
+         <TextField fx:id="classroomType" promptText="Class Room type" style="-fx-background-color: #05071F; -fx-background-radius: 5em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
             <VBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -54,7 +45,7 @@
                <Tooltip fx:id="crTypeTooltip" text="Enter class room type (lecture or lab etc .)" />
             </tooltip>
          </TextField>
-         <TextField fx:id="classroomAvailable" promptText="Class Room Available">
+         <TextField fx:id="classroomAvailable" promptText="Class Room Available" style="-fx-background-color: #05071F; -fx-background-radius: 5em; -fx-border-color: #fff; -fx-border-radius: 2em; -fx-text-fill: #fff;">
             <VBox.margin>
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
@@ -62,7 +53,7 @@
                <Tooltip fx:id="crAvailableTooltip" text="enter class room available (true or false ))" />
             </tooltip>
          </TextField>
-         <Button mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="Save" textFill="WHITE">
+         <Button mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: #2a73ff;" text="Save" textFill="WHITE">
             <VBox.margin>
                <Insets left="70.0" top="10.0" />
             </VBox.margin>
@@ -74,7 +65,7 @@
          <BorderPane.margin>
             <Insets right="10.0" top="15.0" />
          </BorderPane.margin>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER" wrappingWidth="197.85546875">
+         <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER" wrappingWidth="197.85546875">
             <font>
                <Font name="System Bold" size="14.0" />
             </font>
@@ -87,7 +78,7 @@
                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </VBox.margin>
          </ListView>
-         <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="Next" textFill="WHITE">
+         <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: orange;" text="Next" textFill="WHITE">
             <VBox.margin>
                <Insets left="80.0" top="10.0" />
             </VBox.margin>

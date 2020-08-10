@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.Tooltip?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="453.0" prefWidth="749.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ScheduleController">
+<AnchorPane prefHeight="453.0" prefWidth="749.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ScheduleController">
    <children>
-      <Button fx:id="button" layoutX="645.0" layoutY="29.0" mnemonicParsing="false" onAction="#onButton" style="-fx-background-color: yellow;" text="Display" />
-      <TableView fx:id="tableView" layoutX="14.0" layoutY="92.0" prefHeight="250.0" prefWidth="699.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0">
+      <Button fx:id="button" layoutX="645.0" layoutY="29.0" mnemonicParsing="false" onAction="#onButton" style="-fx-background-color: #2a73ff;" text="Display" textFill="WHITE" />
+      <TableView fx:id="tableView" layoutX="14.0" layoutY="92.0" prefHeight="250.0" prefWidth="699.0" style="-fx-background-color: #05071F;" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="18.0">
         <columns>
           <TableColumn fx:id="daysColumn" prefWidth="90.0" text="Days" />
           <TableColumn fx:id="lecture1Col" text="Lecture1" />

@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="416.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TeacherController">
+<BorderPane prefHeight="416.0" prefWidth="604.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.TeacherController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER TEACHER DETAILS" textAlignment="CENTER" wrappingWidth="212.85546970367432" BorderPane.alignment="CENTER">
          <font>
@@ -28,7 +28,7 @@
    <left>
       <VBox prefHeight="285.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="instructorName" promptText="Instructor name">
+            <TextField fx:id="instructorName" promptText="Instructor name" style="-fx-background-color: #05071F; -fx-border-color: #fff; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -36,7 +36,7 @@
                   <Tooltip fx:id="instructorNameTooltip" text="Enter instructor name" />
                </tooltip>
             </TextField>
-            <TextField fx:id="instructorId" promptText="Instructor id">
+            <TextField fx:id="instructorId" promptText="Instructor id" style="-fx-background-color: #05071F; -fx-border-color: #fff; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -44,7 +44,7 @@
                   <Tooltip fx:id="instructorIdTooltip" text="enter instructor id " />
                </tooltip>
             </TextField>
-            <TextField fx:id="instructorTitle" promptText="Instructor title">
+            <TextField fx:id="instructorTitle" promptText="Instructor title" style="-fx-background-color: #05071F; -fx-border-color: #fff; -fx-background-radius: 5em; -fx-border-radius: 2em; -fx-text-fill: #fff;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -52,7 +52,7 @@
                   <Tooltip fx:id="instructorTitleTooltip" text="enter instructor title ( senior or junor etc. ))" />
                </tooltip>
             </TextField>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="Save" textFill="WHITE">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: #2a73ff;" text="Save" textFill="WHITE">
                <VBox.margin>
                   <Insets left="70.0" top="10.0" />
                </VBox.margin>
@@ -79,7 +79,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </ListView>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="Next" textFill="WHITE">
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: orange;" text="Next" textFill="WHITE">
                <VBox.margin>
                   <Insets left="80.0" top="10.0" />
                </VBox.margin>

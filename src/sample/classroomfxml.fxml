@@ -33,68 +33,74 @@
    </top>
    <left>
       <VBox prefHeight="285.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <TextField fx:id="classroomId" promptText="Class Room id">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <tooltip>
-                  <Tooltip fx:id="crIdTooltip" text="Enter classroom id" />
-               </tooltip></TextField>
-            <TextField fx:id="classroomNo" promptText="Class Room no">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <tooltip>
-                  <Tooltip fx:id="crNoTooltip" text="enter class room number" />
-               </tooltip></TextField>
-            <TextField fx:id="classroomType" promptText="Class Room type">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <tooltip>
-                  <Tooltip fx:id="crTypeTooltip" text="Enter class room type (lecture or lab etc .)" />
-               </tooltip></TextField>
-            <TextField fx:id="classroomAvailable" promptText="Class Room Available">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <tooltip>
-                  <Tooltip fx:id="crAvailableTooltip" text="enter class room availabe (true or false ))" />
-               </tooltip></TextField>
-            <Button mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="70.0" top="10.0" />
-               </VBox.margin></Button>
-         </children>
          <BorderPane.margin>
-            <Insets left="10.0" top="20.0" />
+            <Insets left="10.0" top="20.0"/>
          </BorderPane.margin>
+         <TextField fx:id="classroomId" promptText="Class Room id">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </VBox.margin>
+            <tooltip>
+               <Tooltip fx:id="crIdTooltip" text="Enter classroom id"/>
+            </tooltip>
+         </TextField>
+         <TextField fx:id="classroomNo" promptText="Class Room no">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </VBox.margin>
+            <tooltip>
+               <Tooltip fx:id="crNoTooltip" text="enter class room number"/>
+            </tooltip>
+         </TextField>
+         <TextField fx:id="classroomType" promptText="Class Room type">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </VBox.margin>
+            <tooltip>
+               <Tooltip fx:id="crTypeTooltip" text="Enter class room type (lecture or lab etc .)"/>
+            </tooltip>
+         </TextField>
+         <TextField fx:id="classroomAvailable" promptText="Class Room Available">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </VBox.margin>
+            <tooltip>
+               <Tooltip fx:id="crAvailableTooltip" text="enter class room available (true or false ))"/>
+            </tooltip>
+         </TextField>
+         <Button mnemonicParsing="false" onAction="#onSaveButtonPressed" style="-fx-background-color: blue;" text="save"
+                 textFill="WHITE">
+            <VBox.margin>
+               <Insets left="70.0" top="10.0"/>
+            </VBox.margin>
+         </Button>
       </VBox>
    </left>
    <right>
       <VBox prefHeight="375.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER" wrappingWidth="197.85546875">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </Text>
-            <ListView fx:id="classRoomsListView" prefHeight="200.0" prefWidth="213.0">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin></ListView>
-            <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next" textFill="WHITE">
-               <VBox.margin>
-                  <Insets left="80.0" top="10.0" />
-               </VBox.margin></Button>
-         </children>
          <BorderPane.margin>
-            <Insets right="10.0" top="15.0" />
+            <Insets right="10.0" top="15.0"/>
          </BorderPane.margin>
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Class Rooms" textAlignment="CENTER"
+               wrappingWidth="197.85546875">
+            <font>
+               <Font name="System Bold" size="14.0"/>
+            </font>
+            <VBox.margin>
+               <Insets top="10.0"/>
+            </VBox.margin>
+         </Text>
+         <ListView fx:id="classRoomsListView" prefHeight="200.0" prefWidth="213.0">
+            <VBox.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </VBox.margin>
+         </ListView>
+         <Button mnemonicParsing="false" onAction="#onNextButtonPressed" style="-fx-background-color: red;" text="next"
+                 textFill="WHITE">
+            <VBox.margin>
+               <Insets left="80.0" top="10.0"/>
+            </VBox.margin>
+         </Button>
       </VBox>
    </right>
 </BorderPane>

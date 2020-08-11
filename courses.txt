@@ -1,2 +1,3 @@
-AOA,sc1,cs1,3,Samyan,0,3,false
-DBS,sc1,cs1,3,Atif,0,3,false
+Math,23,cs111,3,Wahla,0,2,false
+Eng,23,cs101,2,Maam,0,2,true
+AOA,23,cs333,4,Maira,0,3,true

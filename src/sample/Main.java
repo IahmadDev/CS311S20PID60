@@ -4,7 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+
+import java.awt.*;
 
 public class Main extends Application {
 
@@ -14,6 +18,9 @@ public class Main extends Application {
         primaryStage.setTitle("Schedule Maker");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        //Icon Added
+        Image anotherIcon = new Image("file:icon.png");
+        primaryStage.getIcons().add(anotherIcon);
     }
 
 

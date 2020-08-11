@@ -67,7 +67,7 @@ public class TeacherController implements Initializable {
     @FXML
     void onSaveButtonPressed(ActionEvent event) {
         if (isEmptyFields()) {
-            showAlertDialoge();
+            ConfirmDialgoe.showAlertDialoge("Validate Fields","Please enter into fields");
         } else {
             String name = instructorName.getText().toString();
             String id = instructorId.getText().toString();
@@ -95,14 +95,6 @@ public class TeacherController implements Initializable {
         } else {
             return false;
         }
-    }
-
-    private void showAlertDialoge() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validate Fields");
-        alert.setHeaderText(null);
-        alert.setContentText("Please enter into fields");
-        alert.showAndWait();
     }
 
 }

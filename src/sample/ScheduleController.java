@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.net.URL;
 import java.util.*;
@@ -49,6 +50,9 @@ public class ScheduleController implements Initializable {
     @FXML
     private Tooltip scComboBoxTooltip;
 
+    @FXML
+    private Text infoText;
+
     private ArrayList<Course> dailyCourses;
 
     public ArrayList<Course> courses = new ArrayList<>();
@@ -70,14 +74,21 @@ public class ScheduleController implements Initializable {
     @FXML
     void onButton(ActionEvent event) {
         tableView.getItems().clear();
-
-        printDataForClassRoom(getClassRoom(comboBoxForClassrooms.getValue().toString()));
-        settingOfData();
-        displayData();
+        if (comboBoxForClassrooms.getValue() == null) {
+            ConfirmDialgoe.showAlertDialoge("Validate Choice box","Please select class room for schedule display");
+        } else {
+            String classId = comboBoxForClassrooms.getValue().toString();
+            infoText.setText("Schedule is showing for " + classId);
+            printDataForClassRoom(getClassRoom(classId));
+            settingOfData();
+            displayData();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        daysColumn.setStyle("-fx-font-weight: bold");
+        infoText.setText("");
 
         initial();
         setComboBox();

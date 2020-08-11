@@ -24,7 +24,7 @@ import java.util.Scanner;
 public class DayController implements Initializable {
 
     @FXML
-    private TextField dayName;
+    private ComboBox<String> dayName;
 
     @FXML
     private Tooltip dayNameTooltip;
@@ -87,13 +87,11 @@ public class DayController implements Initializable {
     @FXML
     void onSaveButtonPressed(ActionEvent event) {
 
-        if (isEmptyFields()) {
-            showAlertDialoge("Please enter into fields");
-        } else if (isEmptyChoiceBoxes()) {
-            showAlertDialoge("Please select from choice boxes");
+        if (isEmptyChoiceBoxes()) {
+            ConfirmDialgoe.showAlertDialoge("Validate choice boxes","Please select from choice boxes");
         } else {
 
-            String name = dayName.getText().toString();
+            String name = dayName.getValue().toString();
             int startDay = Integer.parseInt(dayStartAt.getValue().toString());
             int endDay = Integer.parseInt(dayEndAt.getValue().toString());
             int breakStart = Integer.parseInt(dayBreakStartAt.getValue().toString());
@@ -109,6 +107,8 @@ public class DayController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<Integer> integers = FXCollections.observableArrayList();
         integers.addAll(6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24);
+
+        dayName.getItems().addAll("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday");
 
         dayStartAt.setItems(integers);
         dayEndAt.setItems(integers);
@@ -184,29 +184,13 @@ public class DayController implements Initializable {
         }
     }
 
-    public boolean isEmptyFields() {
-        if (dayName.getText().toString().isEmpty()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public boolean isEmptyChoiceBoxes() {
         if (dayStartAt.getValue() == null || dayEndAt.getValue() == null
-                || dayBreakStartAt.getValue() == null || dayBreakEndAt.getValue() == null) {
+                || dayBreakStartAt.getValue() == null || dayBreakEndAt.getValue() == null || dayName.getValue() == null) {
             return true;
         } else {
             return false;
         }
-    }
-
-    private void showAlertDialoge(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validate Fields");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 }

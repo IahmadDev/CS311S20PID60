@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #05071F;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
+<BorderPane prefHeight="414.0" prefWidth="604.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
    <top>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ENTER COURSE DETAILS" textAlignment="CENTER" wrappingWidth="197.85546875" BorderPane.alignment="CENTER">
          <font>

@@ -79,7 +79,7 @@ public class ClassroomController implements Initializable {
     void onSaveButtonPressed(ActionEvent event) {
 
         if (isEmptyFields()) {
-            showAlertDialoge();
+            ConfirmDialgoe.showAlertDialoge("Validate Fields","Please enter into fields");
         } else {
             String classId = classroomId.getText().toString();
             String classType = classroomType.getText().toString();
@@ -113,14 +113,6 @@ public class ClassroomController implements Initializable {
         } else {
             return false;
         }
-    }
-
-    private void showAlertDialoge() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validate Fields");
-        alert.setHeaderText(null);
-        alert.setContentText("Please enter into fields");
-        alert.showAndWait();
     }
 
 }

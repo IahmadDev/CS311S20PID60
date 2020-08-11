@@ -99,9 +99,9 @@ public class CourseController implements Initializable {
     void onSaveButtonPressed(ActionEvent event) {
 
         if (isEmptyFields()) {
-            showAlertDialoge("Please enter into fields");
+            ConfirmDialgoe.showAlertDialoge("Validate Fields","Please enter into fields");
         } else if (isEmptyChoiceBoxes()) {
-            showAlertDialoge("Please select from choice boxes");
+            ConfirmDialgoe.showAlertDialoge("Validate choice boxes","Please select from choice boxes");
         } else {
 
             String name = courseName.getText().toString();
@@ -222,14 +222,6 @@ public class CourseController implements Initializable {
         } else {
             return false;
         }
-    }
-
-    private void showAlertDialoge(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Validate Fields");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
 }
